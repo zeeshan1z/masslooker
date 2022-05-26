@@ -32,6 +32,8 @@ if($cookie){
 		echo "[~] [Media : ".$getakunV2['user']['media_count']."] [Follower : ".$getakunV2['user']['follower_count']."] [Following : ".$getakunV2['user']['following_count']."]\n";
 		echo "[~] Please wait 5 second for loading script\n";
 		echo "[~] "; for($x = 0; $x <= 4; $x++){ echo "========"; sleep(1); } echo "\n\n";
+		$new_run = 0;
+		settype($new_run, "integer");
 		do {
 			$targets	= file_get_contents('./data/'.$targetFile);
 			$targets 	= explode("\n", str_replace("\r", "", $targets));
@@ -149,21 +151,22 @@ if($cookie){
 								saveData('./data/storyData.txt', $stories['reels']);
 								saveData('./data/daily/'.date('d-m-Y').'.txt', $stories['reels']);
 							}
+							$new_run++;
 							sleep($sleep_1);
 						}
 					endforeach;
-					echo "[~] ".date('d-m-Y H:i:s')." - Sleep for ".$sleep_2." second to bypass instagram limit\n"; sleep($sleep_2);
+					echo "[~] ".date('d-m-Y H:i:s')." - Sleep for ".$sleep_2." second to bypass instagram limit== [$new_run] \n"; sleep($sleep_2);
 				endfor;
 				echo "[~] ".count($reels)." story from ".$target." collected\n";
 				echo "[~] ".count($reels_suc)." story from ".$target." marked as seen\n";
 				echo "[~] ".count($today)." story reacted today\n";
-				echo "[~] ".date('d-m-Y H:i:s')." - Sleep for 30 second to bypass instagram limit\n";
-				echo "[~] "; for($x = 0; $x <= 4; $x++){ echo "========"; sleep(6); } echo "\n\n";
+				echo "[~] ".date('d-m-Y H:i:s')." - Sleep for 150 second to bypass instagram limit\n";
+				echo "[~] "; for($x = 0; $x <= 4; $x++){ echo "========"; sleep(30); } echo "\n\n";
 			}
-			if(count($today) > '1900'){
+			if(count($today) > '19000'){
 				echo "[~] ".count($today)." story reacted today\n";
 				echo "[~] Limit instagram api 2000 seen/day\n";
-				echo "[~] Sleep for 20 hours to bypass instagram limit\n";
+				echo "[~] Sleep for 20 hour to bypass instagram limit\n";
 				sleep(72000);
 				echo "[~] End sleep...\n\n";
 			}
